@@ -1,0 +1,58 @@
+/* SkeletonCard.css — shimmer card matching HostelCard size */
+
+.skeleton-card-wrap {
+    border-radius: 16px;
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid #ebebeb;
+}
+
+/* Shimmer base */
+@keyframes sk-shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+.sk-img,
+.sk-line {
+    background: linear-gradient(90deg,
+            #f0f0f0 25%,
+            #e8e8e8 50%,
+            #f0f0f0 75%);
+    background-size: 400% 100%;
+    animation: sk-shimmer 1.5s ease infinite;
+}
+
+.sk-img {
+    height: 200px;
+    width: 100%;
+}
+
+.sk-body {
+    padding: 14px 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.sk-line {
+    height: 14px;
+    border-radius: 7px;
+}
+
+.sk-line--wide {
+    width: 85%;
+}
+
+.sk-line--medium {
+    width: 60%;
+}
+
+.sk-line--narrow {
+    width: 38%;
+}

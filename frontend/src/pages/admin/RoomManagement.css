@@ -1,0 +1,86 @@
+/* Room Management Styles */
+.room-management {
+    width: 100%;
+}
+
+/* Hostel Selector */
+.hostel-selector {
+    margin-bottom: var(--space-6);
+    padding: var(--space-4);
+}
+
+.hostel-selector label {
+    display: block;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-2);
+}
+
+.hostel-selector select {
+    width: 100%;
+}
+
+/* Rooms Grid */
+.rooms-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-4);
+}
+
+.room-card {
+    padding: var(--space-4);
+}
+
+.room-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-3);
+}
+
+.room-icon {
+    font-size: 2rem;
+}
+
+.status-badge {
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+}
+
+.status-badge.available {
+    background: hsla(145, 70%, 50%, 0.15);
+    color: var(--color-success);
+    border: 1px solid var(--color-success);
+}
+
+.status-badge.occupied {
+    background: hsla(0, 0%, 50%, 0.15);
+    color: var(--color-text-tertiary);
+    border: 1px solid var(--color-border);
+}
+
+.room-card h3 {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--space-2);
+}
+
+.room-details p {
+    margin-bottom: var(--space-1);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+}
+
+.room-details strong {
+    color: var(--color-text-primary);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .rooms-grid {
+        grid-template-columns: 1fr;
+    }
+}

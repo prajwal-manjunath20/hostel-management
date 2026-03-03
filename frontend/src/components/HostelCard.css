@@ -1,0 +1,109 @@
+.hostel-card {
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--white);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+    text-decoration: none;
+    color: var(--charcoal);
+}
+
+.hostel-card:hover {
+    box-shadow: var(--shadow);
+    transform: translateY(-5px);
+}
+
+.hostel-card__img-wrap {
+    position: relative;
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    background: var(--gray-light);
+}
+
+.hostel-card__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.hostel-card:hover .hostel-card__img {
+    transform: scale(1.05);
+}
+
+.hostel-card__badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: var(--white);
+    color: var(--charcoal);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: var(--radius-pill);
+    box-shadow: var(--shadow-sm);
+}
+
+.hostel-card__cancel {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(0, 166, 153, 0.9);
+    color: white;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: var(--radius-pill);
+}
+
+.hostel-card__body {
+    padding: 14px 16px 16px;
+}
+
+.hostel-card__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 4px;
+}
+
+.hostel-card__city {
+    color: var(--gray);
+    font-size: 13px;
+}
+
+.hostel-card__rating {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.hostel-card__count {
+    color: var(--gray);
+    font-weight: 400;
+}
+
+.hostel-card__name {
+    font-family: var(--font-heading);
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.hostel-card__price {
+    font-size: 14px;
+    color: var(--gray);
+}
+
+.hostel-card__price strong {
+    color: var(--charcoal);
+    font-size: 16px;
+}
+
+.hostel-card__total {
+    font-size: 12px;
+}

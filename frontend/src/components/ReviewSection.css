@@ -1,0 +1,236 @@
+.review-section {
+    padding: 32px 0;
+}
+
+.review-section__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.review-section__header h2 {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+}
+
+/* Summary */
+.review-summary {
+    background: var(--ivory-dark);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 28px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 28px;
+    align-items: start;
+}
+
+.review-summary__avg {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.review-summary__number {
+    font-size: 3rem;
+    font-weight: 700;
+    font-family: var(--font-heading);
+}
+
+.review-summary__star {
+    font-size: 2rem;
+}
+
+.rating-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+    font-size: 13px;
+}
+
+.rating-bar__label {
+    width: 28px;
+    color: var(--gray);
+}
+
+.rating-bar__track {
+    flex: 1;
+    height: 8px;
+    background: var(--gray-light);
+    border-radius: var(--radius-pill);
+    overflow: hidden;
+}
+
+.rating-bar__fill {
+    height: 100%;
+    background: var(--charcoal);
+    border-radius: var(--radius-pill);
+    transition: width 0.5s ease;
+}
+
+.rating-bar__pct {
+    width: 32px;
+    color: var(--gray);
+    text-align: right;
+}
+
+.review-sub {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.review-sub__item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    background: white;
+    padding: 10px 14px;
+    border-radius: var(--radius-sm);
+}
+
+.review-sub__label {
+    color: var(--gray);
+}
+
+.review-sub__val {
+    font-weight: 600;
+}
+
+/* Star picker */
+.star-picker {
+    display: flex;
+    gap: 2px;
+}
+
+.star-pick {
+    font-size: 22px;
+    color: var(--gray-light);
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color 0.15s;
+}
+
+.star-pick--active {
+    color: var(--gold);
+}
+
+/* Review form */
+.review-form {
+    background: var(--ivory-dark);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 24px;
+}
+
+.review-form__row {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.review-form__rating label {
+    font-size: 13px;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.review-form__comment {
+    margin-bottom: 16px;
+}
+
+/* Review list */
+.review-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.review-item {
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--gray-light);
+}
+
+.review-item:last-child {
+    border-bottom: none;
+}
+
+.review-item__header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.review-item__avatar {
+    width: 40px;
+    height: 40px;
+    background: var(--coral-light);
+    color: var(--coral);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+}
+
+.review-item__name {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.review-item__date {
+    font-size: 12px;
+    color: var(--gray);
+}
+
+.review-item__rating {
+    margin-left: auto;
+    font-weight: 700;
+    background: var(--ivory-dark);
+    padding: 4px 10px;
+    border-radius: var(--radius-pill);
+    font-size: 13px;
+}
+
+.review-item__comment {
+    font-size: 14px;
+    color: var(--charcoal);
+    line-height: 1.7;
+    margin-bottom: 10px;
+}
+
+.review-item__sub {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.review-item__sub-item {
+    font-size: 12px;
+    color: var(--gray);
+    background: var(--ivory-dark);
+    padding: 3px 10px;
+    border-radius: var(--radius-pill);
+}
+
+.review-empty {
+    color: var(--gray);
+    font-size: 14px;
+    padding: 20px 0;
+}
+
+@media (max-width: 768px) {
+    .review-summary {
+        grid-template-columns: 1fr;
+    }
+
+    .review-sub {
+        grid-template-columns: 1fr;
+    }
+}

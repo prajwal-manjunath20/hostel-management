@@ -1,0 +1,380 @@
+/* ── Base ─────────────────────────────────────────────────────── */
+.marketplace {
+    background: var(--ivory, #faf8f5);
+    min-height: 100vh;
+}
+
+/* ── Sticky Navbar ─────────────────────────────────────────────── */
+.market-nav {
+    background: #ffffff;
+    border-bottom: 1px solid #ebebeb;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: 12px 0;
+}
+
+.marketplace__header {
+    position: sticky;
+    top: 0;
+    background: #ffffff;
+    border-bottom: 1px solid #ebebeb;
+    z-index: 100;
+    padding: 12px 0;
+}
+
+.marketplace__header-inner {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.marketplace__logo {
+    font-family: var(--font-heading, 'Playfair Display', serif);
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #FF5A5F;
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+.marketplace__city-input {
+    flex: 1;
+    max-width: 500px;
+    border-radius: 50px !important;
+    border: 1px solid #dddddd;
+    padding: 10px 20px;
+    font-size: 14px;
+    color: #222222;
+    background: #ffffff;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.marketplace__city-input:focus {
+    border-color: #FF5A5F;
+}
+
+.marketplace__header-links {
+    margin-left: auto;
+}
+
+/* ── Layout ────────────────────────────────────────────────────── */
+.marketplace__body {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 32px;
+    padding: 32px 24px 60px;
+    max-width: 1280px;
+    margin: 0 auto;
+    align-items: start;
+}
+
+/* ── Sidebar ────────────────────────────────────────────────────── */
+.marketplace__sidebar {
+    background: #ffffff;
+    border: 1px solid #ebebeb;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+    position: sticky;
+    top: 80px;
+}
+
+.marketplace__sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.marketplace__sidebar-header h3 {
+    font-family: var(--font-heading, 'Playfair Display', serif);
+    font-size: 1rem;
+    color: #222222;
+}
+
+.marketplace__clear {
+    font-size: 13px;
+    color: #FF5A5F;
+    text-decoration: underline;
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+
+.filter-group {
+    margin-bottom: 20px;
+}
+
+.filter-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #222222;
+    margin-bottom: 8px;
+}
+
+.filter-group .input-field,
+.marketplace__sidebar input,
+.marketplace__sidebar select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #dddddd;
+    border-radius: 8px;
+    font-size: 13px;
+    color: #222222;
+    background: #ffffff;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.filter-group .input-field:focus,
+.marketplace__sidebar input:focus,
+.marketplace__sidebar select:focus {
+    border-color: #FF5A5F;
+}
+
+/* ── Price inputs with ₹ prefix ───────────────────────────────── */
+.price-input-group {
+    display: flex;
+    gap: 10px;
+}
+
+.price-field {
+    position: relative;
+    flex: 1;
+}
+
+.price-field input {
+    width: 100%;
+    padding: 10px 10px 10px 26px;
+    border: 1px solid #dddddd;
+    border-radius: 8px;
+    font-size: 13px;
+    color: #222222;
+    background: #ffffff;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.price-field input:focus {
+    border-color: #FF5A5F;
+}
+
+.currency {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999999;
+    font-size: 13px;
+    pointer-events: none;
+}
+
+/* ── Guest +/− stepper ────────────────────────────────────────── */
+.guest-control {
+    display: flex;
+    align-items: center;
+    border: 1px solid #dddddd;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.guest-btn {
+    width: 36px;
+    height: 38px;
+    border: none;
+    background: #f7f7f7;
+    color: #222222;
+    font-size: 18px;
+    font-weight: 400;
+    cursor: pointer;
+    transition: background 0.15s;
+    line-height: 1;
+}
+
+.guest-btn:hover {
+    background: #ebebeb;
+}
+
+.guest-btn:active {
+    background: #dddddd;
+}
+
+.guest-count {
+    flex: 1;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    color: #222222;
+}
+
+/* ── Amenity pills (multi-select) ───────────────────────────────────────────── */
+.filter-group__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.filter-group__header label {
+    margin-bottom: 0;
+}
+
+.filter-clear-link {
+    background: none;
+    border: none;
+    color: #FF5A5F;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: underline;
+    padding: 0;
+}
+
+.amenities-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.amenity-pill {
+    padding: 7px 14px;
+    border-radius: 999px;
+    border: 1px solid #dddddd;
+    background: #ffffff;
+    color: #444444;
+    font-size: 12.5px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    white-space: nowrap;
+    user-select: none;
+}
+
+.amenity-pill:hover {
+    border-color: #222222;
+    color: #222222;
+}
+
+.amenity-pill--active {
+    background: #FF5A5F;
+    color: #ffffff;
+    border-color: #FF5A5F;
+    font-weight: 600;
+}
+
+.amenity-pill--active:hover {
+    background: #e04e53;
+    border-color: #e04e53;
+}
+
+/* ── Amenity chips (legacy — kept for OwnerListingManager) ────── */
+.amenity-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+}
+
+
+/* ── Results ────────────────────────────────────────────────────── */
+.marketplace__results {
+    min-width: 0;
+}
+
+.marketplace__results-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.marketplace__count {
+    font-size: 14px;
+    color: #666;
+    font-weight: 500;
+}
+
+.marketplace__filter-toggle {
+    display: none;
+}
+
+.hostel-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+}
+
+/* ── Loading ────────────────────────────────────────────────────── */
+.marketplace__loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 80px 0;
+    color: #888;
+}
+
+/* ── No results ─────────────────────────────────────────────────── */
+.marketplace__empty,
+.no-results {
+    text-align: center;
+    padding: 100px 20px;
+}
+
+.no-results h2 {
+    font-family: var(--font-heading, 'Playfair Display', serif);
+    font-size: 28px;
+    color: #222222;
+    margin-bottom: 12px;
+}
+
+.no-results p {
+    color: #888;
+    font-size: 15px;
+    margin-bottom: 24px;
+}
+
+.marketplace__empty-icon {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: #ccc;
+}
+
+/* ── Pagination ─────────────────────────────────────────────────── */
+.marketplace__pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 40px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #555;
+}
+
+/* ── Mobile ─────────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+    .marketplace__body {
+        grid-template-columns: 1fr;
+        padding: 20px 16px;
+    }
+
+    .marketplace__sidebar {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 200;
+        overflow-y: auto;
+        border-radius: 0;
+    }
+
+    .marketplace__sidebar--open {
+        display: block;
+    }
+
+    .marketplace__filter-toggle {
+        display: flex;
+    }
+}

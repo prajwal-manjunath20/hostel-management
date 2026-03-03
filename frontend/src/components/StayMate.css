@@ -1,0 +1,438 @@
+/* ================================================================
+   StayMate.css — Premium Chatbot (StayNest coral/ivory system)
+   ================================================================ */
+
+/* ── Toggle button ──────────────────────────────────────────── */
+.staymate {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    z-index: 9999;
+    font-family: 'Poppins', sans-serif;
+}
+
+.staymate__toggle {
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    background: #FF5A5F;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 28px rgba(255, 90, 95, 0.42);
+    transition: transform 200ms ease, box-shadow 200ms ease, background 180ms ease;
+    position: relative;
+}
+
+.staymate__toggle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 12px 36px rgba(255, 90, 95, 0.50);
+    background: #e04e53;
+}
+
+.staymate__toggle:active {
+    transform: scale(0.96);
+}
+
+.staymate__toggle--open {
+    background: #444444;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.20);
+}
+
+.staymate__toggle--open:hover {
+    background: #333333;
+}
+
+/* Pulse ring on closed state */
+.staymate__pulse {
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 90, 95, 0.40);
+    animation: pulsePing 2.2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes pulsePing {
+    0% {
+        transform: scale(1);
+        opacity: 0.9;
+    }
+
+    70% {
+        transform: scale(1.45);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1.45);
+        opacity: 0;
+    }
+}
+
+/* ── Chat window ────────────────────────────────────────────── */
+.staymate__window {
+    position: absolute;
+    bottom: 72px;
+    right: 0;
+    width: 370px;
+    background: #ffffff !important;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.16), 0 4px 16px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ebebeb;
+}
+
+/* ── Header ─────────────────────────────────────────────────── */
+.staymate__header {
+    background: #FF5A5F;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.staymate__avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.22);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.staymate__name {
+    font-weight: 700;
+    font-size: 14px;
+    color: #ffffff;
+    flex: 1;
+}
+
+.staymate__status {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.80);
+    margin-top: 1px;
+}
+
+.staymate__clear-btn,
+.staymate__close {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.75);
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    border-radius: 6px;
+    transition: color 150ms, background 150ms;
+}
+
+.staymate__clear-btn:hover,
+.staymate__close:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.16);
+}
+
+/* ── Tabs ───────────────────────────────────────────────────── */
+.staymate__tabs {
+    display: flex;
+    border-bottom: 1px solid #f0f0f0;
+    background: #ffffff;
+    flex-shrink: 0;
+}
+
+.staymate__tab {
+    flex: 1;
+    padding: 10px 0;
+    font-size: 13px;
+    font-weight: 600;
+    color: #999999;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    transition: color 150ms, border-color 150ms;
+    font-family: 'Poppins', sans-serif;
+}
+
+.staymate__tab--active {
+    color: #FF5A5F !important;
+    border-bottom-color: #FF5A5F !important;
+}
+
+/* ── Messages area ──────────────────────────────────────────── */
+.staymate__messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: #faf8f5 !important;
+    max-height: 340px;
+    min-height: 200px;
+    scroll-behavior: smooth;
+}
+
+.staymate__messages::-webkit-scrollbar {
+    width: 4px;
+}
+
+.staymate__messages::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.staymate__messages::-webkit-scrollbar-thumb {
+    background: #dddddd;
+    border-radius: 4px;
+}
+
+/* Message rows */
+.staymate__msg {
+    display: flex;
+}
+
+.staymate__msg--user {
+    justify-content: flex-end;
+}
+
+.staymate__msg--bot {
+    justify-content: flex-start;
+}
+
+/* Bubbles */
+.staymate__bubble {
+    max-width: 82%;
+    padding: 10px 14px;
+    border-radius: 16px;
+    font-size: 13.5px;
+    line-height: 1.55;
+    word-break: break-word;
+}
+
+.staymate__msg--user .staymate__bubble {
+    background: #FF5A5F !important;
+    color: #ffffff !important;
+    border-radius: 16px 16px 4px 16px;
+}
+
+.staymate__msg--bot .staymate__bubble {
+    background: #ffffff !important;
+    color: #222222 !important;
+    border: 1px solid #ebebeb;
+    border-radius: 16px 16px 16px 4px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Typing indicator */
+.staymate__bubble--typing {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 12px 16px;
+}
+
+.staymate__bubble--typing span {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #cccccc;
+    animation: typingDot 1.2s infinite ease-in-out;
+}
+
+.staymate__bubble--typing span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.staymate__bubble--typing span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes typingDot {
+
+    0%,
+    80%,
+    100% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+
+    40% {
+        transform: scale(1.35);
+        opacity: 1;
+    }
+}
+
+/* ── Quick reply pills ──────────────────────────────────────── */
+.staymate__quick {
+    padding: 8px 16px 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    background: #faf8f5;
+    border-top: 1px solid #f0f0f0;
+}
+
+.staymate__quick-btn {
+    background: #ffffff !important;
+    border: 1px solid #e0e0e0 !important;
+    color: #444444 !important;
+    padding: 7px 14px !important;
+    border-radius: 999px !important;
+    font-size: 12.5px !important;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 160ms ease;
+    font-family: 'Poppins', sans-serif;
+}
+
+.staymate__quick-btn:hover {
+    background: #FF5A5F !important;
+    color: #ffffff !important;
+    border-color: #FF5A5F !important;
+    transform: translateY(-1px);
+}
+
+/* ── Input row ──────────────────────────────────────────────── */
+.staymate__input-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    background: #ffffff;
+    border-top: 1px solid #f0f0f0;
+    flex-shrink: 0;
+}
+
+.staymate__input {
+    flex: 1;
+    border: 1px solid #e0e0e0 !important;
+    border-radius: 999px;
+    padding: 9px 16px;
+    font-size: 13.5px;
+    color: #222222 !important;
+    background: #f7f7f7 !important;
+    outline: none;
+    font-family: 'Poppins', sans-serif;
+    transition: border-color 160ms, background 160ms;
+}
+
+.staymate__input:focus {
+    border-color: #FF5A5F !important;
+    background: #ffffff !important;
+}
+
+.staymate__input::placeholder {
+    color: #aaaaaa;
+}
+
+.staymate__send {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #FF5A5F !important;
+    color: #ffffff !important;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background 160ms, transform 160ms;
+    box-shadow: 0 3px 10px rgba(255, 90, 95, 0.30);
+}
+
+.staymate__send:hover:not(:disabled) {
+    background: #e04e53 !important;
+    transform: scale(1.08);
+}
+
+.staymate__send:active {
+    transform: scale(0.94);
+}
+
+.staymate__send:disabled {
+    background: #ffb3b5 !important;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* ── Help / FAQ tab ─────────────────────────────────────────── */
+.staymate__help {
+    padding: 14px 16px 20px;
+    overflow-y: auto;
+    max-height: 380px;
+    background: #faf8f5 !important;
+}
+
+.staymate__help-heading {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.10em;
+    color: #bbbbbb;
+    margin-bottom: 12px;
+}
+
+.staymate__faq {
+    background: #ffffff;
+    border: 1px solid #ebebeb;
+    border-radius: 12px;
+    padding: 12px 14px;
+    margin-bottom: 10px;
+    transition: box-shadow 160ms;
+}
+
+.staymate__faq:hover {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+}
+
+.staymate__faq-q {
+    font-size: 13px;
+    font-weight: 700;
+    color: #222222;
+    margin-bottom: 5px;
+}
+
+.staymate__faq-a {
+    font-size: 12.5px;
+    color: #666666;
+    line-height: 1.55;
+}
+
+/* ── Window entrance animation ──────────────────────────────── */
+@keyframes popIn {
+    from {
+        opacity: 0;
+        transform: scale(0.88) translateY(16px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.staymate__window.fade-in {
+    animation: popIn 260ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* ── Mobile ─────────────────────────────────────────────────── */
+@media (max-width: 480px) {
+    .staymate {
+        bottom: 16px;
+        right: 16px;
+    }
+
+    .staymate__window {
+        width: calc(100vw - 32px);
+        right: -4px;
+    }
+}

@@ -1,0 +1,322 @@
+/* ================================================================
+   theme.css — StayNest Light Theme (replaces old dark theme)
+   ================================================================ */
+
+:root {
+  /* ── StayNest Brand Colors ─────────────────────────────────── */
+  --color-primary: #FF5A5F;
+  --color-primary-dark: #e04e53;
+  --color-primary-light: #fff0f0;
+
+  --color-secondary: #00a699;
+  --color-secondary-dark: #008b80;
+  --color-secondary-light: #e0f5f3;
+
+  --color-success: #00a699;
+  --color-warning: #ffb400;
+  --color-error: #e02020;
+
+  /* ── Background / Surface (LIGHT — was dark hsl(240,15%,8%)) ─ */
+  --color-bg-primary: #faf8f5;
+  /* ivory */
+  --color-bg-secondary: #f5f0eb;
+  --color-bg-tertiary: #ebebeb;
+
+  --color-surface: #ffffff;
+  --color-surface-elevated: #ffffff;
+
+  /* ── Text (DARK — was #fff) ────────────────────────────────── */
+  --color-text-primary: #222222;
+  --color-text-secondary: #717171;
+  --color-text-tertiary: #aaaaaa;
+
+  /* ── Border (VISIBLE — was near-transparent white) ────────── */
+  --color-border: #ebebeb;
+  --color-border-hover: #cccccc;
+
+  /* ── Gradients (LIGHT — no more dark gradients) ────────────── */
+  --gradient-primary: #FF5A5F;
+  /* plain coral, no gradient */
+  --gradient-surface: #ffffff;
+  /* plain white */
+  --gradient-glow: radial-gradient(circle at 50% 0%, rgba(255, 90, 95, 0.08), transparent 50%);
+
+  /* ── Spacing (same) ────────────────────────────────────────── */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 28px;
+  --space-8: 32px;
+  --space-12: 48px;
+
+  /* ── Border Radius ─────────────────────────────────────────── */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --radius-full: 9999px;
+
+  /* ── Shadows ───────────────────────────────────────────────── */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12);
+  --shadow-glow: 0 0 24px rgba(255, 90, 95, 0.15);
+
+  /* ── Transitions ───────────────────────────────────────────── */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 220ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ── Typography ────────────────────────────────────────────── */
+  --font-family: 'Poppins', system-ui, sans-serif;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+  --font-size-4xl: 2.25rem;
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* ── Layout ────────────────────────────────────────────────── */
+  --sidebar-width: 260px;
+  --navbar-height: 64px;
+  --max-content-width: 1400px;
+}
+
+/* ── Reset ───────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ── Body — LIGHT background (was dark hsl(240,15%,8%)) ──────── */
+body {
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-normal);
+  line-height: 1.6;
+  color: var(--color-text-primary);
+  /* #222222 */
+  background-color: var(--color-bg-primary);
+  /* #faf8f5 ivory */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Card (LIGHT — was dark gradient-surface) ────────────────── */
+.card {
+  background: var(--color-surface);
+  /* #ffffff */
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  border: 1px solid var(--color-border);
+  transition: all var(--transition-base);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--color-border-hover);
+}
+
+/* Remove dark glow effect */
+.card-glow::before {
+  display: none;
+}
+
+/* ── Buttons (LIGHT) ─────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 20px;
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background: #FF5A5F;
+  /* coral — replaces gradient */
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(255, 90, 95, 0.25);
+}
+
+.btn-primary:hover {
+  background: #e04e53;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(255, 90, 95, 0.35);
+}
+
+.btn-secondary {
+  background: #ffffff;
+  color: #222222;
+  border: 1px solid #ebebeb;
+}
+
+.btn-secondary:hover {
+  background: #f7f7f7;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--color-text-secondary);
+}
+
+.btn-ghost:hover {
+  background: #f5f5f5;
+  color: #222222;
+}
+
+/* ── Inputs (LIGHT — was dark surface) ──────────────────────── */
+.input {
+  width: 100%;
+  padding: 10px 14px;
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  color: #222222;
+  /* dark text */
+  background: #ffffff;
+  /* white bg */
+  border: 1px solid #dddddd;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+}
+
+.input:focus {
+  outline: none;
+  border-color: #FF5A5F;
+  box-shadow: 0 0 0 3px rgba(255, 90, 95, 0.12);
+}
+
+.input::placeholder {
+  color: #bbbbbb;
+}
+
+/* ── Glass utility (LIGHT version) ──────────────────────────── */
+.glass {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  border: 1px solid #ebebeb;
+}
+
+/* ── Text utilities ──────────────────────────────────────────── */
+.text-primary {
+  color: #222222;
+}
+
+.text-secondary {
+  color: #717171;
+}
+
+.text-tertiary {
+  color: #aaaaaa;
+}
+
+.bg-primary {
+  background-color: #faf8f5;
+}
+
+.bg-secondary {
+  background-color: #f5f0eb;
+}
+
+.bg-surface {
+  background-color: #ffffff;
+}
+
+/* ── Scrollbar (light) ───────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f5f5f5;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #FF5A5F;
+  border-radius: 999px;
+}
+
+/* ── Skeleton (LIGHT) ────────────────────────────────────────── */
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--radius-md);
+}
+
+/* ── Animations ──────────────────────────────────────────────── */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn var(--transition-base) ease-out;
+}
+
+.animate-slide-in {
+  animation: slideIn var(--transition-base) ease-out;
+}
+
+/* ── Responsive typography ───────────────────────────────────── */
+@media (max-width: 768px) {
+  :root {
+    --font-size-3xl: 1.5rem;
+    --font-size-4xl: 1.875rem;
+  }
+}

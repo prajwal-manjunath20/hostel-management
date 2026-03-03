@@ -1,0 +1,281 @@
+/* ================================================================
+   ui.css — Shared styles for all /components/ui/ components
+   All values use design tokens from theme.css — ZERO hardcoding.
+   ================================================================ */
+
+/* ── Button ─────────────────────────────────────────────────── */
+.ui-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    border: none;
+    border-radius: var(--radius-full);
+    font-family: var(--font-family);
+    font-weight: 600;
+    cursor: pointer;
+    transition: background var(--transition-fast),
+        transform var(--transition-fast),
+        box-shadow var(--transition-fast),
+        opacity var(--transition-fast);
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.ui-btn:disabled {
+    opacity: 0.52;
+    cursor: not-allowed;
+}
+
+.ui-btn:active:not(:disabled) {
+    transform: scale(0.97);
+}
+
+/* Sizes */
+.ui-btn--sm {
+    padding: 7px 16px;
+    font-size: var(--font-size-xs);
+}
+
+.ui-btn--md {
+    padding: 11px 24px;
+    font-size: var(--font-size-sm);
+}
+
+.ui-btn--lg {
+    padding: 14px 32px;
+    font-size: var(--font-size-base);
+}
+
+/* Variants */
+.ui-btn--primary {
+    background: var(--color-primary);
+    color: #fff;
+    box-shadow: 0 4px 14px rgba(255, 90, 95, 0.25);
+}
+
+.ui-btn--primary:hover:not(:disabled) {
+    background: var(--color-primary-dark);
+    box-shadow: 0 8px 24px rgba(255, 90, 95, 0.35);
+    transform: translateY(-1px);
+}
+
+.ui-btn--secondary {
+    background: var(--color-surface);
+    color: var(--color-text-primary);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--color-border);
+}
+
+.ui-btn--secondary:hover:not(:disabled) {
+    border-color: var(--color-border-hover);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+}
+
+.ui-btn--ghost {
+    background: transparent;
+    color: var(--color-primary);
+    border: 1.5px solid var(--color-primary);
+}
+
+.ui-btn--ghost:hover:not(:disabled) {
+    background: var(--color-primary-light);
+}
+
+.ui-btn--danger {
+    background: var(--color-error);
+    color: #fff;
+}
+
+.ui-btn--danger:hover:not(:disabled) {
+    background: #c01818;
+    transform: translateY(-1px);
+}
+
+.ui-btn--full {
+    width: 100%;
+}
+
+/* ── Input ─────────────────────────────────────────────────── */
+.ui-input-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+}
+
+.ui-label {
+    font-size: var(--font-size-xs);
+    font-weight: 700;
+    color: var(--color-text-primary);
+    letter-spacing: 0.04em;
+}
+
+.ui-input {
+    border: 1.5px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 10px 14px;
+    font-size: var(--font-size-sm);
+    color: var(--color-text-primary);
+    background: var(--color-surface);
+    font-family: var(--font-family);
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    width: 100%;
+    outline: none;
+}
+
+.ui-input::placeholder {
+    color: var(--color-text-tertiary);
+}
+
+.ui-input:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(255, 90, 95, 0.14);
+}
+
+.ui-input--error {
+    border-color: var(--color-error);
+}
+
+.ui-input--error:focus {
+    box-shadow: 0 0 0 3px rgba(224, 32, 32, 0.12);
+}
+
+.ui-error-msg {
+    font-size: var(--font-size-xs);
+    color: var(--color-error);
+    margin-top: 2px;
+}
+
+/* ── Spinner ─────────────────────────────────────────────────── */
+.ui-spinner {
+    border-radius: 50%;
+    border-style: solid;
+    border-color: var(--color-border);
+    border-top-color: var(--color-primary);
+    animation: uiSpin 0.75s linear infinite;
+    flex-shrink: 0;
+}
+
+.ui-spinner--sm {
+    width: 18px;
+    height: 18px;
+    border-width: 2px;
+}
+
+.ui-spinner--md {
+    width: 28px;
+    height: 28px;
+    border-width: 3px;
+}
+
+.ui-spinner--lg {
+    width: 44px;
+    height: 44px;
+    border-width: 4px;
+}
+
+@keyframes uiSpin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.ui-spinner-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-8) 0;
+}
+
+/* ── Badge ─────────────────────────────────────────────────── */
+.ui-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 10px;
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-xs);
+    font-weight: 700;
+    line-height: 1;
+}
+
+.ui-badge--coral {
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+}
+
+.ui-badge--green {
+    background: #e6f7f5;
+    color: #00a699;
+}
+
+.ui-badge--yellow {
+    background: #fff8e1;
+    color: #b88900;
+}
+
+.ui-badge--gray {
+    background: var(--color-bg-secondary);
+    color: var(--color-text-secondary);
+}
+
+/* ── EmptyState ─────────────────────────────────────────────── */
+.ui-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: var(--space-12) var(--space-6);
+    gap: var(--space-3);
+}
+
+.ui-empty__icon {
+    font-size: 2.8rem;
+    opacity: 0.7;
+}
+
+.ui-empty__title {
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+    color: var(--color-text-primary);
+}
+
+.ui-empty__sub {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    max-width: 320px;
+    line-height: 1.6;
+}
+
+/* ── Skeleton ─────────────────────────────────────────────────── */
+.ui-skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
+    background-size: 400% 100%;
+    animation: uiShimmer 1.5s ease infinite;
+    border-radius: var(--radius-sm);
+}
+
+@keyframes uiShimmer {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+.ui-skeleton--text {
+    height: 14px;
+    border-radius: var(--radius-full);
+}
+
+.ui-skeleton--block {
+    border-radius: var(--radius-md);
+}
+
+.ui-skeleton--circle {
+    border-radius: var(--radius-full);
+}

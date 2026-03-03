@@ -1,0 +1,489 @@
+/* ================================================================
+   StayNest — Global Design System
+   ================================================================ */
+
+/* Google Fonts are loaded in index.html */
+
+/* ── CSS Custom Properties ───────────────────────────────────── */
+:root {
+  --coral: #FF5A5F;
+  --coral-dark: #e04a4f;
+  --coral-light: #fff0f0;
+  --ivory: #FFF8F3;
+  --ivory-dark: #f5ede3;
+  --charcoal: #222222;
+  --gray: #717171;
+  --gray-light: #ebebeb;
+  --white: #ffffff;
+  --green: #00a699;
+  --gold: #ffb400;
+
+  --font-heading: 'Playfair Display', Georgia, serif;
+  --font-body: 'Poppins', system-ui, sans-serif;
+
+  --radius-sm: 8px;
+  --radius: 16px;
+  --radius-lg: 24px;
+  --radius-pill: 999px;
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.10);
+  --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.14);
+  --shadow-coral: 0 4px 20px rgba(255, 90, 95, 0.30);
+
+  --transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Reset ───────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--ivory);
+  color: var(--charcoal);
+  line-height: 1.6;
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/* ── Global link reset — kill browser blue underlines everywhere ── */
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 160ms ease;
+}
+
+/* Navbar / header links */
+.home-nav__link,
+.nav-link,
+.header-link {
+  color: #222222;
+  font-weight: 500;
+  padding: 8px 12px;
+  border-radius: 999px;
+  text-decoration: none;
+}
+
+.home-nav__link:hover,
+.nav-link:hover,
+.header-link:hover {
+  color: #FF5A5F;
+  background: rgba(255, 90, 95, 0.06);
+}
+
+/* Footer links — subtle, never blue */
+.home-footer a,
+.footer a {
+  color: rgba(255, 255, 255, 0.72);
+  text-decoration: none;
+  transition: color 160ms ease;
+}
+
+.home-footer a:hover,
+.footer a:hover {
+  color: #FF5A5F;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: var(--font-body);
+}
+
+input,
+textarea,
+select {
+  font-family: var(--font-body);
+}
+
+/* ── Scrollbar ───────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--ivory-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--coral);
+  border-radius: var(--radius-pill);
+}
+
+/* ── Utility Classes ─────────────────────────────────────────── */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.text-coral {
+  color: var(--coral);
+}
+
+.text-gray {
+  color: var(--gray);
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* ── Buttons ─────────────────────────────────────────────────── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--coral);
+  color: var(--white);
+  padding: 12px 28px;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  font-size: 15px;
+  transition: var(--transition);
+  box-shadow: var(--shadow-coral);
+}
+
+.btn-primary:hover {
+  background: var(--coral-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(255, 90, 95, 0.4);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--coral);
+  padding: 11px 27px;
+  border: 2px solid var(--coral);
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  font-size: 15px;
+  transition: var(--transition);
+}
+
+.btn-outline:hover {
+  background: var(--coral);
+  color: var(--white);
+  transform: translateY(-2px);
+}
+
+/* ── Card ────────────────────────────────────────────────────── */
+.card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+  overflow: hidden;
+}
+
+.card:hover {
+  box-shadow: var(--shadow);
+  transform: translateY(-4px);
+}
+
+/* ── Input Fields ────────────────────────────────────────────── */
+.input-field {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid var(--gray-light);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  transition: var(--transition);
+  background: var(--white);
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: var(--coral);
+  box-shadow: 0 0 0 3px rgba(255, 90, 95, 0.12);
+}
+
+/* ── Star Rating ─────────────────────────────────────────────── */
+.stars {
+  color: var(--gold);
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.rating-text {
+  color: var(--gray);
+  font-size: 13px;
+}
+
+/* ── Badge ───────────────────────────────────────────────────── */
+.badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.badge-coral {
+  background: var(--coral-light);
+  color: var(--coral);
+}
+
+.badge-green {
+  background: #e0f5f3;
+  color: var(--green);
+}
+
+.badge-gold {
+  background: #fff8e1;
+  color: #b88900;
+}
+
+/* ── Section Heading ─────────────────────────────────────────── */
+.section-heading {
+  font-size: 1.8rem;
+  margin-bottom: 8px;
+}
+
+.section-subheading {
+  color: var(--gray);
+  margin-bottom: 32px;
+}
+
+/* ── Loading Spinner ─────────────────────────────────────────── */
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid var(--gray-light);
+  border-top-color: var(--coral);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ── Fade in animation ───────────────────────────────────────── */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.4s ease forwards;
+}
+
+/* ── Sticky navbar offset ────────────────────────────────────── */
+.page-content,
+.app-main {
+  padding-top: 64px;
+  /* height of fixed Navbar */
+}
+
+/* ── Legacy dark-theme variable nullification ────────────────── */
+/* These override any old admin CSS that references dark tokens.  */
+/* Defined LAST so they win the cascade without !important.       */
+:root {
+  /* Light aliases for old var() references in legacy CSS */
+  --color-background: #faf8f5;
+  --color-surface: #ffffff;
+  --color-border: #ebebeb;
+  --color-text-primary: #222222;
+  --color-text-secondary: #717171;
+  --gradient-primary: #FF5A5F;
+  /* kills gradient text trick */
+  --font-family: 'Poppins', system-ui, sans-serif;
+  --font-size-sm: 0.875rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+  --font-size-4xl: 2.25rem;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 28px;
+  --space-8: 32px;
+  --transition-base: all 0.2s ease;
+}
+
+/* ── NProgress top loading bar — coral brand color ───────────── */
+#nprogress .bar {
+  background: #FF5A5F !important;
+  height: 3px !important;
+}
+
+#nprogress .peg {
+  box-shadow: 0 0 10px #FF5A5F, 0 0 5px #FF5A5F !important;
+}
+
+
+/* ── Scroll Reveal ───────────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity 680ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 680ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger siblings: each .reveal inside a parent gets +100ms delay */
+.reveal:nth-child(2) {
+  transition-delay: 80ms;
+}
+
+.reveal:nth-child(3) {
+  transition-delay: 160ms;
+}
+
+.reveal:nth-child(4) {
+  transition-delay: 240ms;
+}
+
+/* ── Skeleton Loader ─────────────────────────────────────────── */
+.skeleton-card {
+  background: #ffffff;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid #ebebeb;
+}
+
+.skeleton-img {
+  width: 100%;
+  height: 200px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
+  background-size: 400% 100%;
+  animation: skeletonShimmer 1.4s ease infinite;
+}
+
+.skeleton-line {
+  height: 14px;
+  border-radius: 7px;
+  margin: 12px 16px 0;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
+  background-size: 400% 100%;
+  animation: skeletonShimmer 1.4s ease infinite;
+}
+
+.skeleton-line--short {
+  width: 55%;
+}
+
+.skeleton-line--long {
+  width: 85%;
+  margin-bottom: 16px;
+}
+
+@keyframes skeletonShimmer {
+  0% {
+    background-position: 100% 0;
+  }
+
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+/* ── 3D card tilt (applied via JS onMouseMove, CSS base) ─────── */
+.card-tilt {
+  transition: transform 180ms ease, box-shadow 180ms ease;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.card-tilt:hover {
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.14);
+}
+
+/* ── Search suggestions dropdown ────────────────────────────── */
+.search-suggestions {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  min-width: 220px;
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.14);
+  overflow: hidden;
+  z-index: 200;
+  border: 1px solid #ebebeb;
+  animation: dropdownFade 200ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.suggestion-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 16px;
+  font-size: 14px;
+  color: #333333;
+  cursor: pointer;
+  transition: background 140ms ease;
+}
+
+.suggestion-item:hover {
+  background: #faf8f5;
+  color: #FF5A5F;
+}
+
+.suggestion-item__icon {
+  color: #aaaaaa;
+  font-size: 15px;
+}
+
+@keyframes dropdownFade {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

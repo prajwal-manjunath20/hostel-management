@@ -1,0 +1,446 @@
+/* ================================================================
+   HomePage.css — StayNest Premium (Airbnb-level interaction)
+   ================================================================ */
+
+.homepage {
+    min-height: 100vh;
+    background: #faf8f5;
+}
+
+/* ── Hero ────────────────────────────────────────────────────── */
+.hero {
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-attachment: scroll;
+    /* JS parallax handles motion */
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 24px;
+    overflow: hidden;
+}
+
+.hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.26) 0%, rgba(0, 0, 0, 0.48) 100%);
+    z-index: 1;
+}
+
+/* Subtle coral radial glow — warmth + depth */
+.hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 30%,
+            rgba(255, 90, 95, 0.14),
+            transparent 62%);
+    pointer-events: none;
+    z-index: 2;
+}
+
+
+.hero__content {
+    position: relative;
+    z-index: 10;
+    color: #ffffff;
+    max-width: 900px;
+    width: 100%;
+}
+
+.hero__tagline {
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: 0.8;
+    margin-bottom: 14px;
+    font-weight: 600;
+}
+
+.hero__title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 7vw, 5rem);
+    font-weight: 700;
+    line-height: 1.08;
+    margin-bottom: 18px;
+}
+
+.hero__title span {
+    color: #ffcdd2;
+}
+
+.hero__sub {
+    font-size: 16px;
+    opacity: 0.88;
+    margin-bottom: 42px;
+    max-width: 560px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.65;
+}
+
+/* ── Hero Search Bar — premium floating card ────────────────── */
+.hero-search {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 10px;
+    display: flex;
+    align-items: stretch;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.22);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    transition: transform 240ms ease, box-shadow 240ms ease;
+    animation: fadeInUp 640ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Lift entire card on hover */
+.hero-search:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 28px 80px rgba(0, 0, 0, 0.26);
+}
+
+/* Expand-on-focus: card grows slightly */
+.hero-search--expanded {
+    transform: translateY(-4px) scale(1.012);
+    box-shadow: 0 32px 90px rgba(0, 0, 0, 0.28);
+}
+
+/* ── Sticky search — slides down under fixed navbar ─────────── */
+.hero-search--sticky {
+    position: fixed;
+    top: 74px;
+    left: 50%;
+    transform: translateX(-50%) !important;
+    width: min(960px, calc(100vw - 48px));
+    z-index: 900;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.18);
+    animation: stickySlideDown 300ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes stickySlideDown {
+    from {
+        opacity: 0;
+        top: 60px;
+    }
+
+    to {
+        opacity: 1;
+        top: 74px;
+    }
+}
+
+/* ── Each field ─────────────────────────────────────────────── */
+.hero-search__field {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 14px 22px;
+    border-radius: 12px;
+    transition: background 180ms ease, box-shadow 180ms ease;
+    position: relative;
+    min-width: 0;
+}
+
+.hero-search__field:hover {
+    background: #f7f7f7;
+}
+
+.hero-search__field:focus-within {
+    background: #ffffff;
+    box-shadow: 0 0 0 2px rgba(255, 90, 95, 0.28);
+    z-index: 5;
+}
+
+/* Separator */
+.hero-search__sep {
+    width: 1px;
+    background: #ebebeb;
+    margin: 12px 0;
+    flex-shrink: 0;
+}
+
+/* Hide separators when a neighbouring field is focused */
+.hero-search__field:focus-within+.hero-search__sep,
+.hero-search__sep:has(+ .hero-search__field:focus-within) {
+    opacity: 0;
+}
+
+/* Label */
+.hero-search__label {
+    font-size: 11px;
+    font-weight: 700;
+    color: #222222;
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+    text-decoration: none;
+    user-select: none;
+}
+
+/* Inputs */
+.hero-search__field input {
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 14px;
+    font-weight: 500;
+    color: #222222 !important;
+    padding: 2px 0;
+    width: 100%;
+    font-family: 'Poppins', sans-serif;
+}
+
+.hero-search__field input::placeholder {
+    color: #8f8f8f;
+    opacity: 1;
+    font-weight: 400;
+}
+
+/* Blanket override vs any dark-theme global rule */
+.hero-search input,
+.hero-search select {
+    color: #222222 !important;
+}
+
+/* Date inputs */
+.hero-search__field input[type="date"] {
+    color: #333333;
+}
+
+/* ── Search button ──────────────────────────────────────────── */
+.hero-search__btn-wrapper {
+    display: flex;
+    align-items: center;
+    padding-left: 12px;
+    flex-shrink: 0;
+}
+
+.hero-search__btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #FF5A5F;
+    color: #ffffff;
+    border: none;
+    border-radius: 999px;
+    padding: 14px 26px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+    box-shadow: 0 6px 20px rgba(255, 90, 95, 0.30);
+}
+
+.hero-search__btn:hover {
+    background: #e04e53;
+    transform: scale(1.05);
+    box-shadow: 0 10px 28px rgba(255, 90, 95, 0.40);
+}
+
+.hero-search__btn:active {
+    transform: scale(0.97);
+}
+
+/* ── Entrance animation ─────────────────────────────────────── */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(28px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ── Content sections ───────────────────────────────────────── */
+.home-section {
+    padding: 64px 0;
+    border-bottom: 1px solid #ebebeb;
+}
+
+.home-section:last-child {
+    border-bottom: none;
+}
+
+.hostel-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: 24px;
+}
+
+/* Horizontal scroll row (Recently Viewed on mobile) */
+.hostel-scroll {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: 24px;
+}
+
+@media (max-width: 768px) {
+    .hostel-scroll {
+        display: flex;
+        overflow-x: auto;
+        gap: 16px;
+        padding-bottom: 8px;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .hostel-scroll::-webkit-scrollbar {
+        display: none;
+    }
+
+    .hostel-scroll>* {
+        flex: 0 0 78vw;
+        scroll-snap-align: start;
+    }
+}
+
+
+.section-loader {
+    display: flex;
+    justify-content: center;
+    padding: 60px 0;
+}
+
+/* ── Footer — light Airbnb style ────────────────────────────── */
+.home-footer {
+    background: #faf8f5;
+    border-top: 1px solid #ebebeb;
+    padding: 60px 0 32px;
+}
+
+.home-footer__grid {
+    display: grid;
+    grid-template-columns: 1.4fr repeat(3, 1fr);
+    gap: 40px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid #ebebeb;
+}
+
+.home-footer__logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #FF5A5F;
+    margin-bottom: 10px;
+}
+
+.home-footer__col>p {
+    font-size: 14px;
+    color: #999;
+    line-height: 1.6;
+    max-width: 200px;
+}
+
+.home-footer__col h4 {
+    font-size: 13px;
+    font-weight: 700;
+    color: #222222;
+    margin-bottom: 14px;
+    letter-spacing: 0.02em;
+}
+
+.home-footer__col a,
+.home-footer__col a:visited {
+    display: block;
+    font-size: 14px;
+    color: #717171;
+    text-decoration: none;
+    margin: 8px 0;
+    transition: color 160ms ease;
+}
+
+.home-footer__col a:hover {
+    color: #FF5A5F;
+}
+
+/* Footer bottom bar */
+.home-footer__bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 20px;
+    font-size: 13px;
+    color: #aaa;
+}
+
+.home-footer__bottom a,
+.home-footer__bottom a:visited {
+    color: #aaa;
+    text-decoration: none;
+    transition: color 160ms ease;
+}
+
+.home-footer__bottom a:hover {
+    color: #FF5A5F;
+}
+
+.home-footer__legal {
+    display: flex;
+    gap: 20px;
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 860px) {
+    .hero-search {
+        flex-direction: column;
+        border-radius: 16px;
+        max-width: 480px;
+    }
+
+    .hero-search__sep {
+        width: 100%;
+        height: 1px;
+        margin: 0;
+    }
+
+    .hero-search__btn-wrapper {
+        padding: 4px 10px 10px;
+    }
+
+    .hero-search__btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .hero-search--sticky {
+        width: calc(100vw - 32px);
+    }
+}
+
+@media (max-width: 768px) {
+    .home-footer__grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .hero__title {
+        font-size: 2.4rem;
+    }
+
+    .hero {
+        height: 100svh;
+    }
+}
+
+@media (max-width: 480px) {
+    .home-footer__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .home-footer__bottom {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+}

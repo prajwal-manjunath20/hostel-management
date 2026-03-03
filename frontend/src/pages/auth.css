@@ -1,0 +1,265 @@
+/* ================================================================
+   auth.css — Form styles for Login, Register, ForgotPassword, etc.
+   Works inside AuthLayout's right panel (no wrapper card needed).
+   All values use design tokens — zero hardcoded colors.
+   ================================================================ */
+
+/* The outer .auth-wrapper is unused when inside AuthLayout.
+   Keep for backward compat if any page renders standalone. */
+.auth-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-bg-primary);
+    padding: var(--space-6);
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 440px;
+    background: var(--color-surface);
+    border-radius: var(--radius-xl);
+    padding: var(--space-8) var(--space-8);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--color-border);
+}
+
+/* Inside AuthLayout right panel — no card wrapper */
+.auth-form-panel .auth-card {
+    box-shadow: none;
+    border: none;
+    padding: 0;
+    background: transparent;
+}
+
+/* ── Brand ──────────────────────────────────────────────────── */
+.auth-brand {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-family: 'Playfair Display', serif;
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: var(--space-6);
+}
+
+/* ── Headings ───────────────────────────────────────────────── */
+.auth-title {
+    font-size: var(--font-size-2xl);
+    font-weight: 800;
+    color: var(--color-text-primary);
+    margin-bottom: var(--space-1);
+    font-family: 'Playfair Display', serif;
+}
+
+.auth-subtitle {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-6);
+    line-height: 1.55;
+}
+
+/* ── Form fields ────────────────────────────────────────────── */
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+.auth-field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+}
+
+.auth-field label {
+    font-size: var(--font-size-xs);
+    font-weight: 700;
+    color: var(--color-text-primary);
+    letter-spacing: 0.04em;
+}
+
+.auth-field input,
+.auth-field select {
+    border: 1.5px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 11px 14px;
+    font-size: var(--font-size-sm);
+    color: var(--color-text-primary);
+    background: var(--color-surface);
+    font-family: var(--font-family);
+    outline: none;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    width: 100%;
+}
+
+.auth-field input::placeholder {
+    color: var(--color-text-tertiary);
+}
+
+.auth-field input:focus,
+.auth-field select:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(255, 90, 95, 0.14);
+}
+
+.auth-field__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.auth-field__link {
+    font-size: var(--font-size-xs);
+    color: var(--color-primary);
+    font-weight: 600;
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+.auth-field__link:hover {
+    color: var(--color-primary-dark);
+}
+
+/* ── Error banner ───────────────────────────────────────────── */
+.auth-error {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    background: #fff0f0;
+    color: var(--color-error);
+    border: 1px solid #fcc;
+    border-radius: var(--radius-md);
+    padding: 10px 14px;
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--space-3);
+}
+
+/* ── Success banner ─────────────────────────────────────────── */
+.auth-success {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    background: #e6f7f5;
+    color: #00a699;
+    border: 1px solid #b2e1dd;
+    border-radius: var(--radius-md);
+    padding: 10px 14px;
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--space-3);
+}
+
+/* ── Submit button ──────────────────────────────────────────── */
+.auth-submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    border: none;
+    border-radius: var(--radius-full);
+    padding: 13px 24px;
+    background: var(--color-primary);
+    color: #ffffff;
+    font-size: var(--font-size-sm);
+    font-weight: 700;
+    cursor: pointer;
+    font-family: var(--font-family);
+    transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+    box-shadow: 0 4px 14px rgba(255, 90, 95, 0.25);
+    margin-top: var(--space-2);
+}
+
+.auth-submit:hover:not(:disabled) {
+    background: var(--color-primary-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(255, 90, 95, 0.30);
+}
+
+.auth-submit:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+/* ── Inline spinner (auth button loading state) ─────────────── */
+.auth-spinner {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.35);
+    border-top-color: #ffffff;
+    animation: authSpin 0.7s linear infinite;
+    flex-shrink: 0;
+}
+
+@keyframes authSpin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ── Footer link ────────────────────────────────────────────── */
+.auth-footer {
+    text-align: center;
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    margin-top: var(--space-5);
+}
+
+.auth-footer__link {
+    color: var(--color-primary);
+    font-weight: 700;
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+.auth-footer__link:hover {
+    color: var(--color-primary-dark);
+}
+
+/* ── Divider ────────────────────────────────────────────────── */
+.auth-divider {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    color: var(--color-text-tertiary);
+    font-size: var(--font-size-xs);
+    margin: var(--space-3) 0;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--color-border);
+}
+
+/* ── Role select (Register) ─────────────────────────────────── */
+.auth-role-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2);
+}
+
+.auth-role-btn {
+    padding: 10px;
+    border: 1.5px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    cursor: pointer;
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    font-family: var(--font-family);
+    transition: border-color var(--transition-fast), color var(--transition-fast), background var(--transition-fast);
+    text-align: center;
+}
+
+.auth-role-btn--active,
+.auth-role-btn:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+    background: var(--color-primary-light);
+}
