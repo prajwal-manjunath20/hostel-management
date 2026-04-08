@@ -95,7 +95,6 @@ app.use('/api/admin', superadminRoutes);
 app.use('/api/marketplace', require('./routes/marketplace'));
 app.use('/api/reviews', require('./routes/review'));
 app.use('/api/gatepass', require('./routes/gatePass'));
-app.use('/api/phone', require('./routes/phone'));
 
 // Health endpoint
 app.get('/api/health', (req, res) => {

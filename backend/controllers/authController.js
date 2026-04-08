@@ -309,3 +309,43 @@ exports.resetPassword = async (req, res) => {
     return serverError(res, err, logger);
   }
 };
+
+/**
+ * @desc  Save user location (city, lat, lng) from browser geolocation
+ * @route POST /api/auth/update-location
+ * @access Private
+ */
+exports.updateLocation = async (req, res) => {
+    try {
+        const { city, latitude, longitude } = req.body;
+        const update = {};
+        if (city) update.city = city.trim();
+        if (latitude !== undefined) update.latitude = latitude;
+        if (longitude !== undefined) update.longitude = longitude;
+
+        if (Object.keys(update).length === 0) {
+            return apiError(res, 'VALIDATION_ERROR', 'At least one location field required');
+        }
+
+        await User.findByIdAndUpdate(req.user.id, update);
+        return success(res, null, 'Location updated');
+    } catch (err) {
+        return serverError(res, err, logger);
+    }
+};
+
+/**
+ * @desc  Check if email is already taken (for inline registration UX)
+ * @route GET /api/auth/check-email?email=xxx
+ * @access Public
+ */
+exports.checkEmail = async (req, res) => {
+    try {
+        const { email } = req.query;
+        if (!email) return apiError(res, 'VALIDATION_ERROR', 'email query param required');
+        const exists = await User.exists({ email: email.trim().toLowerCase() });
+        return success(res, { exists: !!exists });
+    } catch (err) {
+        return serverError(res, err, logger);
+    }
+};

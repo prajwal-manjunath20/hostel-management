@@ -1,14 +1,28 @@
 const nodemailer = require('nodemailer');
+const { Resend } = require('resend');
 const logger = require('../utils/logger');
 
-// Create transporter
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
+// Create Resend instance
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+// Helper for Nodemailer Ethereal Email fallback
+let etherealTransporter = null;
+const getEtherealTransporter = async () => {
+  if (!etherealTransporter) {
+    const testAccount = await nodemailer.createTestAccount();
+    etherealTransporter = nodemailer.createTransport({
+      host: 'smtp.ethereal.email',
+      port: 587,
+      secure: false,
+      auth: {
+        user: testAccount.user,
+        pass: testAccount.pass,
+      },
+    });
+    logger.info('Ethereal Email transporter created for development');
   }
-});
+  return etherealTransporter;
+};
 
 // Email templates
 const emailTemplates = {
@@ -223,17 +237,56 @@ const emailTemplates = {
 const sendEmail = async (to, template, data) => {
   try {
     const emailContent = emailTemplates[template](data);
+    
+    // Check if we have a valid Resend key
+    const hasValidResendKey = process.env.RESEND_API_KEY && 
+      !process.env.RESEND_API_KEY.includes('your_resend_api_key');
+      
+    // Use Resend in production or if we have a valid key
+    const useResend = process.env.NODE_ENV === 'production' || hasValidResendKey;
 
-    const mailOptions = {
-      from: `"Hostel Management System" <${process.env.EMAIL_USER}>`,
-      to,
-      subject: emailContent.subject,
-      html: emailContent.html
-    };
+    if (useResend) {
+      const { data: info, error } = await resend.emails.send({
+        from: 'Hostel Management System <onboarding@resend.dev>',
+        to: [to],
+        subject: emailContent.subject,
+        html: emailContent.html
+      });
 
-    const info = await transporter.sendMail(mailOptions);
-    logger.info('Email sent', { to, template, messageId: info.messageId });
-    return { success: true, messageId: info.messageId };
+      if (error) {
+        throw error;
+      }
+
+      logger.info('Email sent via Resend', { to, template, messageId: info.id });
+      return { success: true, messageId: info.id };
+    } else {
+      // Fallback to Ethereal Email for development
+      const transporter = await getEtherealTransporter();
+      const info = await transporter.sendMail({
+        from: '"Hostel Management System" <no-reply@hostelmanagement.local>',
+        to,
+        subject: emailContent.subject,
+        html: emailContent.html
+      });
+      
+      const previewUrl = nodemailer.getTestMessageUrl(info);
+      
+      logger.info('Email sent via Ethereal', { 
+        to, 
+        template, 
+        messageId: info.messageId,
+        previewUrl 
+      });
+      
+      console.log('----------------------------------------');
+      console.log('📧 TEST EMAIL SENT (ETHEREAL)');
+      console.log(`To: ${to}`);
+      console.log(`Subject: ${emailContent.subject}`);
+      console.log(`Preview URL: ${previewUrl}`);
+      console.log('----------------------------------------');
+      
+      return { success: true, messageId: info.messageId, previewUrl };
+    }
   } catch (error) {
     logger.error('Email send failed', error, { to, template });
     return { success: false, error: error.message };

@@ -17,9 +17,9 @@ router.get('/my', protect, authorize('resident'), getMyRequests);
 router.patch('/:id/cancel', protect, authorize('resident'), cancelRequest);
 
 // Staff routes
-router.get('/', protect, authorize('staff', 'admin'), getAllRequests);
-router.patch('/:id/status', protect, authorize('staff', 'admin'), updateStatus);
-router.patch('/:id/assign', protect, authorize('staff', 'admin'), assignRequest);
-router.patch('/:id/resolve', protect, authorize('staff', 'admin'), resolveRequest);
+router.get('/', protect, authorize('staff', 'admin', 'superadmin', 'owner'), getAllRequests);
+router.patch('/:id/status', protect, authorize('staff', 'admin', 'superadmin', 'owner'), updateStatus);
+router.patch('/:id/assign', protect, authorize('staff', 'admin', 'superadmin', 'owner'), assignRequest);
+router.patch('/:id/resolve', protect, authorize('staff', 'admin', 'superadmin', 'owner'), resolveRequest);
 
 module.exports = router;

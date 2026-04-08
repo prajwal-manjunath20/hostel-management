@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import api from '../api';
 import './DashboardLayout.css';
 
 /* ── Nav config per role ────────────────────────────────────── */
@@ -58,6 +59,7 @@ export default function DashboardLayout({ children, role, pageTitle }) {
     const navigate = useNavigate();
     const location = useLocation();
     const [sidebarOpen, setSidebarOpen] = useState(false);
+    const [resending, setResending] = useState(false);
 
     const navItems = NAV[role] || NAV[user?.role] || [];
     const initials = user?.name
@@ -69,6 +71,18 @@ export default function DashboardLayout({ children, role, pageTitle }) {
         || 'Dashboard';
 
     const handleLogout = () => { logout(); navigate('/login'); };
+
+    const handleResend = async () => {
+        setResending(true);
+        try {
+            await api.post('/auth/resend-verification');
+            alert('Verification email sent! Please check your inbox.');
+        } catch (err) {
+            alert(err.response?.data?.error?.message || 'Failed to resend email.');
+        } finally {
+            setResending(false);
+        }
+    };
 
     return (
         <div className="dash-layout">

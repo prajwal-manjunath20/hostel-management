@@ -7,14 +7,10 @@ const {
     verifyEmail,
     resendVerification,
     forgotPassword,
-    resetPassword
-} = require('../controllers/authController');
-const {
-    sendPhoneOtp,
-    verifyPhoneOtp,
+    resetPassword,
     updateLocation,
     checkEmail
-} = require('../controllers/phoneController');
+} = require('../controllers/authController');
 const { protect } = require('../middleware/auth');
 const { registerValidation, loginValidation } = require('../validations/authValidation');
 const validate = require('../middleware/validate');
@@ -30,8 +26,6 @@ router.get('/check-email', checkEmail);
 // Protected routes
 router.get('/me', protect, getMe);
 router.post('/resend-verification', protect, resendVerification);
-router.post('/send-otp', protect, sendPhoneOtp);
-router.post('/verify-otp', protect, verifyPhoneOtp);
 router.post('/update-location', protect, updateLocation);
 
 module.exports = router;

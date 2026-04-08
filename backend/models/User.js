@@ -38,7 +38,6 @@ const UserSchema = new mongoose.Schema({
     index: true
   },
   phone: { type: String },
-  isPhoneVerified: { type: Boolean, default: false },
   hostelId: { type: mongoose.Schema.Types.ObjectId, ref: "Hostel" },
   isActive: { type: Boolean, default: true },
 
