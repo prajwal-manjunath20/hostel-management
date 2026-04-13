@@ -3,7 +3,7 @@
 const Hostel = require('../models/Hostel');
 const Room = require('../models/Room');
 const Booking = require('../models/Booking');
-const { uploadFilesToCloudinary } = require('../middleware/upload');
+const { uploadFilesToCloudinary, deleteFromCloudinary } = require('../middleware/upload');
 const { getPaginationParams, getPaginationMeta } = require('../utils/pagination');
 const logger = require('../utils/logger');
 const { success, created, error, serverError } = require('../utils/apiResponse');
@@ -213,6 +213,46 @@ exports.uploadPhotos = async (req, res) => {
 };
 
 /**
+ * @desc    Delete a specific photo from hostel
+ * @route   DELETE /api/hostels/:id/photos
+ * @access  Private (owner)
+ */
+exports.deletePhoto = async (req, res) => {
+    try {
+        const { url } = req.body;
+        if (!url) return res.status(400).json({ success: false, error: 'Photo URL is required' });
+
+        const hostel = await Hostel.findById(req.params.id);
+        if (!hostel) return res.status(404).json({ error: 'Hostel not found' });
+
+        // Verify ownership
+        if (req.user.role !== ROLES.SUPERADMIN && hostel.owner.toString() !== req.user.id)
+            return res.status(403).json({ error: 'Access denied' });
+
+        // Check if photo exists in array
+        if (!hostel.photos.includes(url)) {
+            return res.status(404).json({ success: false, error: 'Photo not found in this hostel' });
+        }
+
+        // Remove from DB array
+        hostel.photos = hostel.photos.filter(p => p !== url);
+        await hostel.save();
+
+        // Delete from Cloudinary (don't await to avoid blocking response, or await if you want confirmation)
+        try {
+            await deleteFromCloudinary(url);
+        } catch (cloudinaryErr) {
+            logger.error('Failed to delete from Cloudinary but removed from DB', { url });
+        }
+
+        res.json({ success: true, message: 'Photo deleted successfully', data: { photos: hostel.photos } });
+    } catch (err) {
+        console.error('Delete photo error:', err);
+        res.status(500).json({ error: 'Deletion failed' });
+    }
+};
+
+/**
  * @desc    Publish / Unpublish hostel on marketplace
  * @route   PATCH /api/hostels/:id/publish
  * @access  Private (owner)
@@ -263,10 +303,22 @@ exports.deleteHostel = async (req, res) => {
             return error(res, 'HAS_ACTIVE_BOOKINGS',
                 'Cannot delete hostel with active or pending bookings.');
 
+        // Cleanup photos from Cloudinary — persistent robustness
+        if (hostel.photos && hostel.photos.length > 0) {
+            try {
+                // Delete all photos associated with this hostel
+                await Promise.all(hostel.photos.map(url => deleteFromCloudinary(url)));
+                logger.info('Hostel photos cleaned up from Cloudinary', { hostelId: id, count: hostel.photos.length });
+            } catch (cloudinaryErr) {
+                logger.error('Cloudinary cleanup failed during hostel deletion', { hostelId: id, error: cloudinaryErr.message });
+                // We continue with DB deletion even if Cloudinary fails to avoid data desync
+            }
+        }
+
         await Hostel.findByIdAndDelete(id);
 
         logger.info('Hostel deleted', { hostelId: id, userId: req.user.id, requestId: req.id });
-        return success(res, null, 'Hostel deleted successfully');
+        return success(res, null, 'Hostel and all associated photos deleted successfully');
     } catch (err) {
         return serverError(res, err, logger);
     }

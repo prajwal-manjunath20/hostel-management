@@ -11,6 +11,7 @@ const {
   updateHostel,
   deleteHostel,
   uploadPhotos,
+  deletePhoto,
   togglePublish
 } = require("../controllers/hostelController");
 
@@ -28,6 +29,9 @@ router.patch("/:id", protect, requireSuperadminOrOwner, checkHostelOwnership, up
 
 // Upload photos to hostel
 router.post("/:id/photos", protect, requireOwner, checkHostelOwnership, uploadHostelPhotos, uploadPhotos);
+
+// Delete photo from hostel
+router.delete("/:id/photos", protect, requireOwner, checkHostelOwnership, deletePhoto);
 
 // Publish / unpublish hostel on marketplace
 router.patch("/:id/publish", protect, requireOwner, checkHostelOwnership, togglePublish);

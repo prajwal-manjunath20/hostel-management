@@ -5,11 +5,15 @@ const { requireOwnerOrStaff, requireOwner, requireSuperadminOrOwner } = require(
 const { checkRoomOwnership } = require("../middleware/ownership");
 const {
   createRoom,
+  bulkCreateRooms,
   getRoomsByHostel,
   getAllRooms,
   updateRoom,
   deleteRoom
 } = require("../controllers/roomController");
+
+// Create rooms in bulk
+router.post("/bulk", protect, requireOwnerOrStaff, bulkCreateRooms);
 
 // Create room (owners and staff)
 router.post("/", protect, requireOwnerOrStaff, createRoom);

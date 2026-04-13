@@ -114,6 +114,13 @@ button {
   border: none;
   background: none;
   font-family: var(--font-body);
+  transition: var(--transition);
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
 input,

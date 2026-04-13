@@ -47,6 +47,51 @@ exports.createRoom = async (req, res) => {
 };
 
 /**
+ * @desc    Bulk create rooms for a hostel
+ * @route   POST /api/rooms/bulk
+ * @access  Private (owners/staff)
+ */
+exports.bulkCreateRooms = async (req, res) => {
+    try {
+        const { hostelId, rooms } = req.body;
+        if (!hostelId || !rooms || !Array.isArray(rooms)) {
+            return res.status(400).json({ error: 'HostelId and an array of rooms are required' });
+        }
+
+        const hostel = await Hostel.findById(hostelId);
+        if (!hostel) return res.status(404).json({ error: 'Hostel not found' });
+
+        // Check ownership
+        const userOwnerId = req.user.role === ROLES.OWNER ? req.user.id : req.user.owner;
+        if (req.user.role !== ROLES.SUPERADMIN && hostel.owner.toString() !== userOwnerId) {
+            return res.status(403).json({ error: 'Access denied' });
+        }
+
+        // Prepare rooms for insertion
+        const roomsToInsert = rooms.map(r => ({
+            hostelId,
+            owner: hostel.owner,
+            roomNumber: r.roomNumber,
+            type: r.type || 'single',
+            capacity: r.capacity || 1,
+            pricePerMonth: r.pricePerMonth || 0,
+            isAvailable: true
+        }));
+
+        const createdRooms = await Room.insertMany(roomsToInsert);
+
+        res.status(201).json({
+            success: true,
+            message: `${createdRooms.length} rooms created successfully`,
+            data: createdRooms
+        });
+    } catch (error) {
+        console.error('Bulk create rooms error:', error);
+        res.status(500).json({ error: 'Failed to bulk create rooms' });
+    }
+};
+
+/**
  * @desc    Get rooms by hostel
  * @route   GET /api/rooms/:hostelId
  * @access  Private

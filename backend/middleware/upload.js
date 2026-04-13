@@ -58,4 +58,27 @@ const uploadFilesToCloudinary = async (files) => {
     return urls;
 };
 
-module.exports = { uploadHostelPhotos, uploadFilesToCloudinary };
+// ── Delete from Cloudinary ──────────────────────────────────────────────────
+const deleteFromCloudinary = async (url) => {
+    try {
+        if (!url) return;
+        
+        // Extract public_id from URL
+        // Example: https://res.cloudinary.com/cloud_name/image/upload/v1234567/staynest-hostels/filename.jpg
+        // Public ID: staynest-hostels/filename
+        const parts = url.split('/');
+        const folderIndex = parts.indexOf('staynest-hostels');
+        if (folderIndex === -1) return;
+
+        const publicIdWithExt = parts.slice(folderIndex).join('/');
+        const publicId = publicIdWithExt.replace(/\.[^/.]+$/, ""); // remove only the last file extension
+
+        const result = await cloudinary.uploader.destroy(publicId);
+        return result;
+    } catch (error) {
+        console.error('Cloudinary delete error:', error);
+        throw error;
+    }
+};
+
+module.exports = { uploadHostelPhotos, uploadFilesToCloudinary, deleteFromCloudinary };

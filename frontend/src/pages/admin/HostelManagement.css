@@ -164,6 +164,141 @@
     flex: 1;
 }
 
+/* Enriched Form Layout */
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+}
+
+.textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.amenities-selection-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: var(--space-2);
+    margin-top: var(--space-2);
+}
+
+.amenity-toggle-chip {
+    padding: var(--space-2) var(--space-3);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition: all var(--transition-fast) ease;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.amenity-toggle-chip:hover {
+    border-color: var(--color-primary);
+    background: hsla(245, 82%, 67%, 0.05);
+}
+
+.amenity-toggle-chip.active {
+    background: var(--color-primary);
+    color: white;
+    border-color: var(--color-primary);
+    box-shadow: 0 4px 12px hsla(245, 82%, 67%, 0.3);
+}
+
+.modal--wide {
+    max-width: 900px;
+    width: 95%;
+}
+
+.modal-header-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+}
+
+.step-indicator {
+    font-size: 10px;
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-primary);
+}
+
+/* Room Wizard Styles */
+.wizard-intro {
+    background: hsla(245, 82%, 67%, 0.05);
+    border-left: 4px solid var(--color-primary);
+    padding: var(--space-3) var(--space-4);
+    margin-bottom: var(--space-6);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+
+.wizard-intro p {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    margin: 0;
+}
+
+.wizard-table-wrap {
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-6);
+    background: white;
+}
+
+.wizard-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--font-size-sm);
+}
+
+.wizard-table th {
+    position: sticky;
+    top: 0;
+    background: var(--color-surface);
+    text-align: left;
+    padding: var(--space-3) var(--space-4);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-secondary);
+    border-bottom: 2px solid var(--color-border);
+    z-index: 10;
+}
+
+.wizard-table td {
+    padding: var(--space-2) var(--space-4);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.wizard-table input, 
+.wizard-table select {
+    width: 100%;
+    padding: var(--space-2);
+    border: 1px solid transparent;
+    border-radius: var(--radius-sm);
+    background: transparent;
+    transition: all var(--transition-fast);
+}
+
+.wizard-table input:hover, 
+.wizard-table select:hover {
+    border-color: var(--color-border);
+    background: var(--color-surface);
+}
+
+.wizard-table input:focus {
+    border-color: var(--color-primary);
+    background: white;
+    outline: none;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .page-header {
@@ -175,4 +310,172 @@
     .hostels-grid {
         grid-template-columns: 1fr;
     }
+}
+
+/* Hostel Card Cover Images */
+.hostel-card {
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.hostel-cover {
+    width: 100%;
+    height: 180px;
+    background: var(--color-surface);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-size-sm);
+    color: var(--color-text-tertiary);
+}
+
+.hostel-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hostel-cover-placeholder {
+    font-weight: var(--font-weight-medium);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.hostel-card-body {
+    padding: var(--space-4);
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.hostel-actions {
+    margin-top: auto;
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--color-border);
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Photo Upload Modal Styles */
+.photo-upload-area {
+    border: 2px dashed var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-4);
+    text-align: center;
+    transition: all var(--transition-fast);
+}
+
+.photo-upload-area:hover {
+    border-color: var(--color-primary);
+    background: var(--color-surface);
+}
+
+.photo-upload-label {
+    display: block;
+    cursor: pointer;
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-secondary);
+}
+
+.photo-upload-label small {
+    display: block;
+    margin-top: var(--space-1);
+    font-weight: normal;
+    color: var(--color-text-tertiary);
+}
+
+.photo-previews {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: var(--space-2);
+    margin-top: var(--space-3);
+}
+
+.photo-preview {
+    position: relative;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    aspect-ratio: 1;
+    border: 1px solid var(--color-border);
+}
+
+.photo-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.photo-remove {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    background: hsla(0, 0%, 0%, 0.6);
+    color: white;
+    border: none;
+    width: 20px;
+    height: 20px;
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    cursor: pointer;
+    backdrop-filter: blur(2px);
+}
+
+.photo-remove:hover {
+    background: var(--color-danger);
+}
+
+/* Photo Management Modal Enhancements */
+.modal-section {
+    margin-bottom: var(--space-4);
+}
+
+.modal-label {
+    display: block;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-2);
+}
+
+.modal-divider {
+    border: none;
+    border-top: 1px solid var(--color-border);
+    margin: var(--space-6) 0;
+}
+
+.empty-photos-text {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-tertiary);
+    font-style: italic;
+    padding: var(--space-2) 0;
+}
+
+.photo-delete-btn {
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all var(--transition-fast) cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    font-size: 12px;
+}
+
+.photo-preview:hover .photo-delete-btn {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.photo-delete-btn:hover {
+    background: var(--color-danger) !important;
+    color: white;
+}
+
+.existing-photos .photo-preview {
+    border: 2px solid transparent;
+    transition: border-color var(--transition-fast);
+}
+
+.existing-photos .photo-preview:hover {
+    border-color: var(--color-primary);
 }
